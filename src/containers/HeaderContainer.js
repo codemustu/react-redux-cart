@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import Header from "../components/Header";
+import { removeFromCart } from "../Services/Actions/actions";
 
-const mapStateToProps = (state) => ({
-  data: state.cartItems,
+const mapStateToProps = (state) => ({ cartItems: state.cartReducer.cartItems });
+
+const mapDispatchToProps = (dispatch) => ({
+  removeFromCartHandler: (item) => dispatch(removeFromCart(item)),
 });
-
-const mapDispatchToProps = (dispatch) => ({});
-
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

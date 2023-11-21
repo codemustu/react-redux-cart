@@ -1,20 +1,26 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../constants";
 
 const initialState = {
-  cartData: [],
+  cartItems: [],
 };
 
-const cartItems = (state = [], action) => {
-  console.log("reducer", state, action);
+const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      return [...state, { cartData: action.data }];
+      return {
+        ...state,
+        cartItems: [...state.cartItems, action.payload],
+      };
     case REMOVE_FROM_CART:
-      state.pop();
-      return [...state];
+      const filteredCart = state.cartItems.filter(
+        (item) => item === action.payload
+      );
+      return {
+        cartItems: filteredCart,
+      };
     default:
       return state;
   }
 };
 
-export default cartItems;
+export default cartReducer;
